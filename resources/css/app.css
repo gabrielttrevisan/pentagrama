@@ -1,0 +1,28 @@
+:root {
+    --marine-blue: #00559b;
+}
+
+body {
+    background-color: var(--marine-blue);
+}
+
+#root {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+header,
+main,
+footer {
+    width: 100%;
+    max-width: 600px;
+}
+
+@media (max-width: 450px) {
+    header,
+    main,
+    footer {
+        width: 100%;
+    }
+}
