@@ -1,6 +1,6 @@
 import React from 'react'
 import { FunctionComponent } from 'react'
-import { getAbbreviation } from '../../../../utils/getAbbreviation'
+import { getAbbreviation } from '../../../../../../utils/getAbbreviation'
 import { AvatarProps } from './Avatar.interface'
 import { Circle } from './Avatar.styles'
 import { Tooltip } from '@mui/material'

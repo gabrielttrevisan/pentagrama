@@ -1,19 +1,18 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { SigInRequest } from '../requests/SigInRequest'
 import { SigUpRequest } from '../requests/SigUpRequest'
 import { Token } from '../responses/Token'
+import { Service } from './Service'
 
-export class AuthService {
+export class AuthService extends Service {
     private static __instace__ = new AuthService()
 
     public static get Instance(): AuthService {
         return AuthService.__instace__
     }
 
-    private api: AxiosInstance
-
     constructor() {
-        this.api = axios.create({
+        super({
             baseURL: 'http://localhost/api',
             timeout: 100000,
         })

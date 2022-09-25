@@ -15,8 +15,9 @@ body {
 header,
 main,
 footer {
-    width: 100%;
-    max-width: 600px;
+    width: 700px;
+    max-width: 700px;
+    min-width: 700px;
 }
 
 @media (max-width: 450px) {
@@ -24,5 +25,6 @@ footer {
     main,
     footer {
         width: 100%;
+        min-width: 100%;
     }
 }

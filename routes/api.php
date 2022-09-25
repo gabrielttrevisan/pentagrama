@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\UserInfoController;
-use App\Http\Controllers\UserSigInController;
-use App\Http\Controllers\UserSignUpController;
-use App\Http\Controllers\UserSigOutController;
+use App\Http\Controllers\City\CityPageController;
+use App\Http\Controllers\City\CityPaginationInfoController;
+use App\Http\Controllers\City\CityStoreController;
+use App\Http\Controllers\City\NeighborhoodStoreController;
+use App\Http\Controllers\User\UserInfoController;
+use App\Http\Controllers\User\UserSigInController;
+use App\Http\Controllers\User\UserSignUpController;
+use App\Http\Controllers\User\UserSigOutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +30,11 @@ Route::prefix('auth')->name('api.auth')->group(function () {
 Route::prefix('user')->name('api.user')->group(function () {
     Route::get('/info', UserInfoController::class)->name('.info');
     Route::post('/sign-up', UserSignUpController::class)->name('.signUp');
+});
+
+Route::prefix('city')->name('api.city')->group(function () {
+    Route::post('/', CityStoreController::class)->name('.store');
+    Route::post('/{id}/neighborhood', NeighborhoodStoreController::class)->name('.store.neighborhood');
+    Route::get('/pagination', CityPaginationInfoController::class)->name('.pagination');
+    Route::get('/page', CityPageController::class)->name('.page');
 });

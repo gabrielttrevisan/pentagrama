@@ -6,21 +6,17 @@ import {
     Popover,
     ListItemIcon,
     ListItemText,
-    IconButton,
 } from '@mui/material'
 import { Box } from '@mui/material'
 import React from 'react'
 import { FunctionComponent } from 'react'
 import { useUserStore } from '../../../../store/useUserStore'
-import { Avatar } from './components/Avatar/Avatar.component'
+import { Avatar } from '../Header/components/Avatar/Avatar.component'
 import { HeaderProps } from './Header.interface'
 import { CustomTypography } from './Header.styles'
-import AddIcon from '@mui/icons-material/Add'
-import { Tooltip } from '@mui/material'
 
 export const Header: FunctionComponent<HeaderProps> = ({
     onLogout,
-    onAddCity,
     ...props
 }) => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null)
@@ -54,15 +50,6 @@ export const Header: FunctionComponent<HeaderProps> = ({
                     columnGap="1rem"
                 >
                     <CustomTypography variant="h1">Cidades</CustomTypography>
-
-                    <Tooltip title="Adicionar Cidade">
-                        <IconButton onClick={onAddCity} size="medium">
-                            <AddIcon
-                                fontSize="medium"
-                                htmlColor={theme.palette.common.white}
-                            />
-                        </IconButton>
-                    </Tooltip>
                 </Box>
 
                 <Box

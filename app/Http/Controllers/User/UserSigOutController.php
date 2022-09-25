@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Response;
 
-class UserInfoController extends Controller
+class UserSigOutController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:sanctum');
     }
 
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request): HttpResponse
     {
         /** @var \App\Models\User $user */
         $user = $request->user();
@@ -25,9 +26,8 @@ class UserInfoController extends Controller
             ], 401);
         }
 
-        return Response::json([
-            'name' => $user->name,
-            'email' => $user->email,
-        ]);
+        $user->tokens()->delete();
+
+        return Response::noContent();
     }
 }

@@ -1,20 +1,20 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
-import { Token } from '../responses/Token'
 import { User } from '../responses/User'
+import { Service } from './Service'
 
-export class UserService {
-    private api: AxiosInstance
+export class UserService extends Service {
     private token: string
 
     constructor(token: string) {
-        this.token = token
-        this.api = axios.create({
+        super({
             baseURL: 'http://localhost/api',
             timeout: 100000,
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
+
+        this.token = token
 
         this.getUserInfo = this.getUserInfo.bind(this)
         this.signOut = this.signOut.bind(this)
