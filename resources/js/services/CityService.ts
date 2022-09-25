@@ -24,13 +24,20 @@ export class CityService {
     }
 
     getPagination({
-        page,
-        pageSize,
-    }: Required<PaginationRequest>): Promise<AxiosResponse<CityPagination>> {
+        pageSize = 3,
+        nameCity,
+        nameNeighborhood,
+        consolidationEnd,
+        consolidationStart,
+    }: PaginationRequest): Promise<AxiosResponse<CityPagination>> {
         return this.api.get('/pagination', {
             params: {
-                page: page.toString(),
+                page: undefined,
                 page_size: pageSize.toString(),
+                name_city: nameCity,
+                name_neighborhood: nameNeighborhood,
+                consolidation_end: consolidationEnd,
+                consolidation_start: consolidationStart,
             },
         })
     }
@@ -38,11 +45,19 @@ export class CityService {
     getPage({
         page,
         pageSize,
+        nameCity,
+        nameNeighborhood,
+        consolidationEnd,
+        consolidationStart,
     }: PaginationRequest): Promise<AxiosResponse<{ cities: City[] }>> {
         return this.api.get('/page', {
             params: {
                 page: page?.toString(),
                 page_size: pageSize?.toString(),
+                name_city: nameCity,
+                name_neighborhood: nameNeighborhood,
+                consolidation_end: consolidationEnd,
+                consolidation_start: consolidationStart,
             },
         })
     }

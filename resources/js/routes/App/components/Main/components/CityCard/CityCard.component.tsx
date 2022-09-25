@@ -29,6 +29,7 @@ export const CityCard: FunctionComponent<CityCardProps> = ({
             justifyContent="flex-start"
             flexDirection="column"
             mb="1rem"
+            flex={1}
         >
             <Wrapper
                 container

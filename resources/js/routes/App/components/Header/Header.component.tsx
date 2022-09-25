@@ -17,10 +17,12 @@ import { HeaderProps } from './Header.interface'
 import { CustomTypography } from './Header.styles'
 import AddIcon from '@mui/icons-material/Add'
 import { Tooltip } from '@mui/material'
+import FilterAltIcon from '@mui/icons-material/FilterAlt'
 
 export const Header: FunctionComponent<HeaderProps> = ({
     onLogout,
     onAddCity,
+    onFilter,
     ...props
 }) => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null)
@@ -58,6 +60,15 @@ export const Header: FunctionComponent<HeaderProps> = ({
                     <Tooltip title="Adicionar Cidade">
                         <IconButton onClick={onAddCity} size="medium">
                             <AddIcon
+                                fontSize="medium"
+                                htmlColor={theme.palette.common.white}
+                            />
+                        </IconButton>
+                    </Tooltip>
+
+                    <Tooltip title="Filtrar Cidade">
+                        <IconButton onClick={onFilter} size="medium">
+                            <FilterAltIcon
                                 fontSize="medium"
                                 htmlColor={theme.palette.common.white}
                             />

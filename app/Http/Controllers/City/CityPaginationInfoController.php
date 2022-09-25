@@ -26,7 +26,29 @@ class CityPaginationInfoController extends Controller
             ], 401);
         }
 
-        $cities = $user->cities()->count();
+        $cities = $user->cities();
+
+        $wheres = [];
+
+        $name_city = $request->name_city;
+
+        if (isset($name_city)) $wheres[] = [ 'name', 'like', "%$name_city%" ];
+
+        $name_neighborhood = $request->name_neighborhood;
+
+        if (isset($name_neighborhood)) $cities->whereRelation('neighborhoods', 'name', 'like', "%$name_neighborhood%");
+
+        $consolidation_start = $request->consolidation_start;
+
+        if (isset($consolidation_start)) $wheres[] = [ 'consolidated_at', '>=', $consolidation_start ];
+
+        $consolidation_end = $request->consolidation_end;
+
+        if (isset($consolidation_end)) $wheres[] = [ 'consolidated_at', '<=', $consolidation_end ];
+
+        if (count($wheres) > 0) $cities->where($wheres);
+
+        $cities = $cities->count();
 
         return Response::json([
             'cities' => $cities,

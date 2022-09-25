@@ -31,10 +31,35 @@ class CityPageController extends Controller
         $pageSize = intval($request->get('page_size', 6));
 
         $cities = $user->cities()
-            ->with('neighborhoods')
-            ->orderBy('created_at', 'desc')
-            ->offset((intval($request->get('page', 0)) - 1) * $pageSize)
-            ->limit($pageSize)
+            ->with('neighborhoods');
+
+        $wheres = [];
+
+        $offset = (intval($request->get('page', 0)) - 1) * $pageSize;
+
+        $name_city = $request->name_city;
+
+        if (isset($name_city)) $wheres[] = [ 'name', 'like', "%$name_city%" ];
+
+        $name_neighborhood = $request->name_neighborhood;
+
+        if (isset($name_neighborhood)) $cities->whereRelation('neighborhoods', 'name', 'like', "%$name_neighborhood%");
+
+        $consolidation_start = $request->consolidation_start;
+
+        if (isset($consolidation_start)) $wheres[] = [ 'consolidated_at', '>=', $consolidation_start ];
+
+        $consolidation_end = $request->consolidation_end;
+
+        if (isset($consolidation_end)) $wheres[] = [ 'consolidated_at', '<=', $consolidation_end ];
+
+        if (count($wheres) > 0) {
+            $cities->where($wheres);
+        }
+
+        $cities = $cities->orderBy('created_at', 'desc')
+            ->skip($offset)
+            ->take($pageSize)
             ->get()
             ->map(fn (City $city) => ([
                 'id' => $city->id,

@@ -16,6 +16,10 @@ class PageRequest extends FormRequest
         return [
             'page' => [ 'numeric', 'nullable' ],
             'page_size' => [ 'numeric', 'nullable' ],
+            'name_city' => [ 'string', 'nullable' ],
+            'name_neighborhood' => [ 'string', 'nullable' ],
+            'consolidation_start' => [ 'date', 'nullable' ],
+            'consolidation_end' => [ 'date', 'nullable' ],
         ];
     }
 
