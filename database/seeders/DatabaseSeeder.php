@@ -36,9 +36,9 @@ class DatabaseSeeder extends Seeder
         );
 
         $cities->each(
-            fn (City $city) => \App\Models\Neighborhood::factory(3)->create(
+            fn (City $city) => \App\Models\Neighborhood::factory(rand(1, 6))->create(
                 fn () => [
-                    'name' => fake()->words(2, true),
+                    'name' => fake()->words(rand(1, 2), true),
                     'city_id' => $city->id,
                 ]
             )
